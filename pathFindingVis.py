@@ -116,7 +116,6 @@ def BFS(draw, grid, start, end):
 				pygame.quit()
 
 		current = open_set.get()
-		open_set_hash.remove(current)
 
 		if current == end:
 			reconstruct_path(came_from, end, draw)
@@ -125,9 +124,9 @@ def BFS(draw, grid, start, end):
 			return True
 
 		for neighbor in current.neighbors:
-			came_from[neighbor] = current
 
 			if neighbor not in open_set_hash:
+				came_from[neighbor] = current
 				open_set.put(neighbor)
 				open_set_hash.add(neighbor)
 				neighbor.make_open()
@@ -268,7 +267,7 @@ def get_clicked_pos(pos, rows, width):
 	return row, col
 
 def main(win, width):
-	ROWS = 50
+	ROWS = 30
 	grid = make_grid(ROWS, width)
 
 	start = None
@@ -307,13 +306,21 @@ def main(win, width):
 					end == None
 
 			if event.type == pygame.KEYDOWN:
+				# when a is pressed execute aStar
 				if event.key == pygame.K_a and start and end:
 					for row in grid:
 						for spot in row:
 							spot.update_neighbors(grid)
 
 					astarAlgorithm(lambda: draw(win, grid, ROWS, width), grid, start, end)
+				# when b is pressed execute BFS
+				if event.key == pygame.K_b and start and end:
+					for row in grid:
+						for spot in row:
+							spot.update_neighbors(grid)
 
+					BFS(lambda: draw(win, grid, ROWS, width), grid, start, end)
+				# when d is pressed execute dijkstra
 				if event.key == pygame.K_d and start and end:
 					for row in grid:
 						for spot in row:
