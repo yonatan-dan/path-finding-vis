@@ -1,5 +1,3 @@
-Absolutely, here's the updated README file with brief explanations of each of the algorithms implemented in your Pygame application:
-
 # Pygame Pathfinding Visualization
 
 This is a Pygame application for visualizing path-finding algorithms. The user can draw on the grid using the mouse and then select one of the following keys to start the algorithm: 'D' for Dijkstra's algorithm, 'A' for A* algorithm, or 'B' for BFS algorithm.
